@@ -12,7 +12,6 @@ import org.testng.annotations.DataProvider;
         tags = "@google"
 )
 public class Runner extends AbstractTestNGCucumberTests {
-
     @Override
     @DataProvider(parallel = true)
     public Object[][] scenarios() {

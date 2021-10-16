@@ -54,7 +54,11 @@ public class ApiSteps {
         int actualStatusCode = apiRequest.getResponse().statusCode();
         Assert.assertEquals(actualStatusCode, code);
     }
-
+    @И("статус код не {int}")
+    public void negativeExpectStatusCode(int code) {
+        int actualStatusCode = apiRequest.getResponse().statusCode();
+        Assert.assertNotEquals(actualStatusCode, code);
+    }
     @И("извлечь данные")
     public void extractVariables(Map<String, String> vars) {
         String responseBody = apiRequest.getResponse().body().asPrettyString();
@@ -65,6 +69,7 @@ public class ApiSteps {
             LOG.info("Извлечены данные: {}={}", k, extractedValue);
         });
     }
+
 
     @И("сгенерировать переменные")
     public void generateVariables(Map<String, String> table) {

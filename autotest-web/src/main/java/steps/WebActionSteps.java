@@ -35,7 +35,6 @@ public class WebActionSteps {
                 .click();
         LOGGER.info("клик на элемент по тексту '{}'", text);
     }
-
     @Если("кликнуть на элемент {string}")
     public void clickOnElement(String elementName) {
         SelenideElement element = pageManager
@@ -59,7 +58,6 @@ public class WebActionSteps {
                 .scrollIntoView("{block: 'center'}");
         LOGGER.info("скролл страницы до элемента '{}'", elementName);
     }
-
     /**
      * скролл до текста
      *
@@ -72,7 +70,6 @@ public class WebActionSteps {
                 .scrollIntoView("{block: 'center'}");
         LOGGER.info("скролл страницы до текста '{}'", text);
     }
-
     @И("подождать {int} сек")
     public void waitSeconds(int timeout) {
         Sleep.pauseSec(timeout);
@@ -94,7 +91,14 @@ public class WebActionSteps {
                 .setValue(value);
         LOGGER.info("в поле '{}' введено значение '{}'", field, value);
     }
-
+    @Когда("отправить в поле {string} значение {string}")
+    public void sendTheField(String field, String value) {
+        SelenideElement fieldElement = pageManager
+                .getCurrentPage()
+                .getElement(field);
+        fieldElement.sendKeys(value);
+        LOGGER.info("в поле '{}' введено значение '{}'", field, value);
+    }
     /**
      * Очистка поля
      *
