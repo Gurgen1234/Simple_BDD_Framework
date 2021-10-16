@@ -28,7 +28,7 @@ public interface WebConfigurations extends Config {
     int webDriverTimeoutSeconds();
 
     @Key("screenAfterStep")
-    @DefaultValue("false")
+    @DefaultValue("true")
     boolean screenAfterStep();
 
     @Key("hub.url")

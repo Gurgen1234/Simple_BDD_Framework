@@ -1,11 +1,15 @@
 package steps;
 
 import actions.WebChecks;
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
+import com.codeborne.selenide.impl.CollectionElement;
 import io.cucumber.java.ru.Когда;
 import io.cucumber.java.ru.Тогда;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.testng.Assert;
 import ru.lanit.at.web.pagecontext.PageManager;
 
 public class WebCheckSteps {
@@ -77,6 +81,22 @@ public class WebCheckSteps {
         WebChecks.elementVisibleOnPage(element, timeoutSeconds);
         LOGGER.info("на странице '{}' имеется элемент '{}'", pageManager.getCurrentPage().name(), elementName);
     }
+    /**
+     * ожидание элемента на странице в течении некоторого времени
+     *
+     * @param elementVal    наименование элемента
+     * @param elementName    количество секунд
+     */
+     @Когда("проверить наличие {string} в списке {string}")
+     public void checkElementOnList(String elementVal, String elementName) {
+         SelenideElement element = pageManager
+                 .getCurrentPage()
+                 .getElement(elementName);
+         element.selectOptionContainingText(elementVal + " (Shared) ");
+         Assert.assertEquals(element.getSelectedValue(), elementName);
+         LOGGER.info("В списке '{}' имеется элемент '{}'", elementName, elementVal,"Не равно");
+//
+     }
     
     /**
      * проверка что на странице отображен элемент
